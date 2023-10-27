@@ -7,6 +7,7 @@ vim.cmd([[
 	]])
 vim.cmd([[
 	let g:vimtex_compiler_latexmk = {
-        \ 'build_dir' : 'build',
+        \ 'out_dir' : 'build',
+	\ 'aux_dir' : 'aux',
 \}
 	]])

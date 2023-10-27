@@ -32,3 +32,5 @@ imap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '
 smap <silent><expr> <S-Tab> luasnip#jumpable(-1) ? '<Plug>luasnip-jump-prev' : '<S-Tab>'
 ]])
 
+-- Nvim-Tree
+keymap("n","<leader>t",":NvimTreeToggle<cr>", opts)

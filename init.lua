@@ -1,9 +1,32 @@
+--require 'user.lazy'
 require 'user.plugins'
 require "user.lsp"
 require "user.nvim-tree"
 require "user.keymaps"
 require "user.cmp"
-require "user.luasnip"
 require "user.vimtex"
+require "user.ultisnip"
 vim.cmd "set nu"
 vim.cmd "colorscheme nord"
+vim.cmd [[ 
+" Get Vim's window ID for switching focus from Zathura to Vim using xdotool.
+" Only set this variable once for the current Vim instance.
+if !exists("g:vim_window_id")
+  let g:vim_window_id = system("xdotool getactivewindow")
+endif
+
+function! s:TexFocusVim() abort
+  " Give window manager time to recognize focus moved to Zathura;
+  " tweak the 200m (200 ms) as needed for your hardware and window manager.
+  sleep 200m  
+
+  " Refocus Vim and redraw the screen
+  silent execute "!xdotool windowfocus " . expand(g:vim_window_id)
+  redraw!
+endfunction
+
+augroup vimtex_event_focus
+  au!
+  au User VimtexEventView call s:TexFocusVim()
+augroup END
+]]
